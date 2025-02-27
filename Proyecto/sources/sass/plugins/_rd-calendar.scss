@@ -1,0 +1,157 @@
+/*
+* @subsection   RD Calendar
+*
+*
+* @author       Evgeniy Gusarov
+* @see          https://ua.linkedin.com/pub/evgeniy-gusarov/8a/a40/54a
+* @version      1.0.0
+*/
+
+@import "../_variables.scss";
+
+.rd-calendar {
+
+  &.show-events {
+
+  }
+}
+
+
+// Today
+.rdc-today_day{
+
+}
+
+.rdc-today_date{
+
+}
+
+.rdc-today_month{
+
+}
+
+.rdc-today_fullyear{
+
+}
+
+
+// Panel
+.rdc-panel{
+
+}
+
+// Controls
+.rdc-next, .rdc-prev, .rdc-events_close{
+  color: $gray;
+  font: 400 18px/38px "FontAwesome";
+  cursor: pointer;
+  transition: .3s all ease;
+  opacity: .5;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.rdc-next{
+  &:before {
+    content: '\f061';
+  }
+}
+
+.rdc-prev{
+  &:before {
+    content: '\f060';
+  }
+}
+
+.rdc-events_close{
+  &:before {
+    content: '\f00d';
+  }
+}
+
+// Events
+.rdc-events{
+  opacity: 0;
+  visibility: hidden;
+  transition: .4s all ease-in-out;
+
+  .rd-calendar.show-events & {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+
+
+.rdc-event{
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+// Table
+.rdc-table{
+  position: relative;
+  width: 100%;
+  table {
+    border-spacing: 4px;
+    border-collapse: separate;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  td {
+    position: relative;
+  }
+}
+
+.rdc-month{
+
+}
+
+.rdc-fullyear{
+
+}
+
+.rdc-table_day{
+  color: $gray;
+  padding: 5px 0;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+.rdc-table_date{
+  width: 60px;
+  height: 60px;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 54px;
+  padding: 3px;
+  color: $white;
+  text-align: center;
+  background-color: $gray;
+  box-sizing: border-box;
+}
+
+.rdc-table_today{
+  background-color: $gray-light;
+}
+
+.rdc-table_event{
+  cursor: pointer;
+  transition: .3s all ease;
+
+  &:hover{
+    color: #fff;
+    background-color: $gray;
+  }
+}
+
+.rdc-table_next,
+.rdc-table_prev{
+  opacity: .5;
+}

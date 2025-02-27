@@ -1,0 +1,115 @@
+//
+// Custom Thumbnails
+// --------------------------------------------------
+
+html body .thumbnail{
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  margin-bottom: 25px;
+
+  .caption{
+    position: relative;
+    border: 1px solid #eeeeee;
+    border-top: none;
+    padding: 34px 10px;
+    color: $gray-base;
+
+    &-static{
+      position: static;
+    }
+
+    h4,
+    &{
+      letter-spacing: 0.08em;
+    }
+
+    p{
+      margin-top: 3px;
+    }
+
+    .small{
+      font-size: 12px;
+    }
+
+    &-bottom{
+      .btn{
+        padding: 11px 30px;
+      }
+    }
+
+    &-top{
+      border-top: 1px solid #eeeeee;
+      padding:41px 10px 28px 10px;
+    }
+
+    &-link{
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translate(-50%, 50%);
+      padding: 11px 40px;
+      border-color: #eeeeee;
+      background-color: #fff;
+
+      &:hover,
+      &:focus{
+        background-color: $gray-base;
+      }
+    }
+  }
+}
+
+.img-thumbnail,
+.thumbnail{
+  box-shadow: none;
+}
+
+.thumbnail-variant-1{ 
+  display: inline-block;
+  position: relative;
+  width: 100%;
+
+  .caption{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: .3s;
+    background-color: rgba(#d7ccc2, .7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:before{
+      content: '+';
+      color: $gray-base;
+      font-size: 100px;
+
+      @media (min-width: $screen-md-min) {
+        font-size: 150px;
+      }
+    }
+  }
+
+  &:hover{
+    .caption{
+      opacity: 1;
+    }
+  }
+}
+
+
+// Make thumbnails to fit entire container width
+.thumbnail-block {
+  display: block;
+
+  > img,
+  a > img {
+    width: 100%;
+    height: auto;
+  }
+}

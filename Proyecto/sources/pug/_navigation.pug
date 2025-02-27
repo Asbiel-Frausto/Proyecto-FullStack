@@ -1,0 +1,27 @@
+// RD Navbar Nav
+ul.rd-navbar-nav
+  li(class=(activeIndex == 1 ? 'active' : ''))
+    a(href='./') Home page
+  li(class=(activeIndex == 2 ? 'active' : ''))
+    a(href='gallery.html') Gallery
+  li(class=(activeIndex == 3 ? 'active' : ''))
+    a(href='about.html') About us
+    // RD Navbar Dropdown
+    ul.rd-navbar-dropdown
+      li
+        a(href='#') history
+      li
+        a(href='#') offers
+      li
+        a(href='#') news
+        ul.rd-navbar-dropdown
+          li
+            a(href='#') fresh
+          li
+            a(href='#') archive
+          li
+            a(href='404.html') 404
+  li(class=(activeIndex == 4 ? 'active' : ''))
+    a(href='links.html') Links
+  li(class=(activeIndex == 5 ? 'active' : ''))
+    a(href='contacts.html') Contacts

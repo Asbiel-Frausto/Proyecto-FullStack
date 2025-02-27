@@ -1,0 +1,207 @@
+extends  ../_skeleton
+
+block variables
+  - var activeIndex = 1
+
+block title
+  title Home
+
+block page
+  // Page Header
+  include ../sections/_header-default
+
+  // Page Content
+  main.page-content
+    section
+      .shell.shell-wide
+        .range.text-sm-left
+          .cell-xl-10.cell-md-9
+            .jumbotron(style="background: url('images/index-01.jpg') center; background-size: cover;")
+              h1 English 
+                span.text-white=" Foxhound"
+                span.reveal-xs-block 
+                  span.icon.icon-lg.icon-circle
+                    span &
+                  span.text-middle Shetland 
+                  span.text-middle.text-white=" Sheepdog"
+              a(href='#').link.link-white dog breeder website
+          .cell-md-3.cell-xl-2.cell-xs-middle.offset-top-40.offset-md-top-0
+            .range
+              .cell-md-12.cell-sm-4
+                .inset-xl-left-40
+                  h4 follow us
+
+                  ul.list-inline.offset-top-20.offset-md-top-40
+                    li
+                      a(href='#').icon.icon-gray.icon-circle.icon-xs.fa-facebook
+                    li
+                      a(href='#').icon.icon-gray.icon-circle.icon-xs.fa-twitter
+                    li
+                      a(href='#').icon.icon-gray.icon-circle.icon-xs.fa-google-plus
+                    li
+                      a(href='#').icon.icon-gray.icon-circle.icon-xs.fa-instagram
+
+              .cell-md-12.cell-sm-4.offset-top-40.offset-sm-top-0.offset-md-top-80
+                .inset-xl-left-40
+                  h4 contacts
+
+                  div.offset-top-20.offset-md-top-40
+                    span.text-middle.icon.icon-xs.text-primary.inset-right-10.material-icons-phonelink_ring
+                    a(href='tel:#').extra-big +1 800 559 35 48
+
+                  div.offset-top-10
+                    span.text-middle.icon.icon-xs.text-primary.inset-right-10.material-icons-email
+                    a(href='mailto:#').big info@demolink.org
+
+              .cell-md-12.cell-sm-4.offset-top-40.offset-sm-top-0.offset-md-top-80
+                .inset-xl-left-40
+                  h4 location
+
+                  .offset-top-20.offset-md-top-40
+                    h5.text-sbold.text-graydark.
+                      28 Jackson Blvd Ste 1020
+                      Chicago
+                      <br class='veil reveal-md-block'>
+                      IL 60604-2340
+
+    hr.veil-md.offset-top-40
+    section.section-80.section-md-122.section-title.section-title-left(data-title='welcome')
+      .shell.shell-wide
+        .page-counter
+          img(src="images/index-02.png" width="441" height="557" alt="").img-responsive.center-block
+        .range.range-xs-center.offset-top-0.offset-md-top-65
+          .cell-md-8.cell-lg-6
+            h4 welcome to our website
+            p.
+              For many years, the English Bulldog has been named the country's most popular breed according
+              to the Governing Council of the Dog Fancy (GCCF), and with its affectionate nature and teddy-bear good looks, it's
+              not hard to see why. As far as personality goes, the English Bulldog is an amazing Dog.
+            a(href='#').btn.btn-default view all Dogs for sale
+
+    section
+      .shell.shell-wide.section-92.section-lg-bottom-148.bg-img-01
+        hr.divider
+        h4 English Bulldog Breed Profile
+        .range.range-xs-center.text-left.offset-top-40.offset-lg-top-80
+          .cell-sm-11.cell-md-10
+            dl.list-terms-variant-1
+              dt
+                span Breed number
+              dd 40
+            dl.list-terms-variant-1
+              dt
+                span Average lifespan
+              dd 15 to 20 years
+            dl.list-terms-variant-1
+              dt
+                span Temperament
+              dd Friendly and affectionate, loyal and devoted, good with children and other pets.
+            dl.list-terms-variant-1
+              dt
+                span Weight
+              dd Males 6.8 to 8.1kg; females 4.5 to 5.4kg
+            dl.list-terms-variant-1
+              dt
+                span AVAILABILITY
+              dd Easy
+            dl.list-terms-variant-1
+              dt
+                span Colours
+              dd Available in almost every colour and coat pattern you can think of.
+            dl.list-terms-variant-1
+              dt
+                span Grooming
+              dd Once a week is adequate. A simple hand groom will often remove dead hair.
+
+    hr.veil-md.offset-top-40
+    section.section-80.section-md-122.section-title.section-title-right(data-title='dogs for sale')
+      .shell.shell-wide
+        .page-counter.page-counter-bottom.page-counter-gray
+          img(src="images/index-04.png" width="441" height="377" alt="").img-responsive.center-block
+        .range.range-xs-center.offset-top-0.offset-md-top-65
+          .cell-md-8.cell-lg-6
+            h4 CHOOSING A Dog
+            p.
+              Choosing between a male and a female is not an easy task, as both make wonderful companions.
+              Differences in personality are mostly attributable to the fact that everyone has something unique about them, rather
+               than to male vs. female differences.
+        // Owl Carousel
+        .owl-carousel.offset-top-40.offset-lg-top-96.owl-dots-modile(data-dots='true' data-items='1',data-sm-items='2',data-md-items='3', data-margin='30', data-lg-margin='84', data-mouse-drag="false")
+            .thumbnail
+              img(src="images/index-05.jpg" width="480" height="321" alt="").img-responsive
+              .caption
+                h4 Date of birth: 19 Feb 2016
+                p.text-graylight.small.text-bold.text-uppercase Delivery possible
+                a(href='#').caption-link.btn.btn-default details
+
+            .thumbnail
+              img(src="images/index-06.jpg" width="480" height="321" alt="").img-responsive
+              .caption
+                h4 Date of birth: 24 may 2012
+                p.text-graylight.small.text-bold.text-uppercase Delivery possible
+                a(href='#').caption-link.btn.btn-default details
+
+            .thumbnail
+              img(src="images/index-07.jpg" width="480" height="321" alt="").img-responsive
+              .caption
+                h4 Date of birth: 30 Sept 2010
+                p.text-graylight.small.text-bold.text-uppercase Delivery possible
+                a(href='#').caption-link.btn.btn-default details
+
+        a(href='#').offset-top-20.offset-lg-top-80.btn.btn-default view all Dogs for sale
+
+    section.section-bottom-80.section-lg-bottom-231
+      .shell.shell-wide.section-92.section-lg-bottom-148.bg-mocos
+        hr.divider
+        h5 articles & publications
+        .range.range-xs-center.offset-top-40.offset-lg-top-54.owl-wrapper
+          .cell-sm-11.cell-md-10
+            // Owl Carousel
+            .owl-custom-controls-nav
+              .owl-prev
+              .owl-next
+            .owl-custom-nav.owl-dots-modile.owl-carousel(data-dots='true' data-items='1',  data-mouse-drag="false")
+              .item
+                .range.range-xs-justify
+                  .cell-xl-4.cell-lg-5.text-lg-left
+                    h6
+                      a(href='#').text-dark Problem of Puppy mortality
+                    p.small.
+                      Puppy mortality is a distressing, as well as an
+                      economic problem, which occurs to some extent in any breeding program. A study by Scott et al, 1976, of over 3,000 Puppies in over 800 litters indicated 34.5% mortality between birth and one year, which is a considerable number.
+
+                  .offset-top-40.offset-lg-top-0.cell-xl-4.cell-lg-5.text-lg-right
+                    h6
+                      a(href='#').text-dark MYTHS & FACTS ABOUT SPAYING OR NEUTERING
+                    p.small.
+                      The animal population is exploding. Each year millions of unwanted pets are born and most are treated like "living garbage" and disposed of. The primary causes of pet euthanasia are the failure of owners to have their pets spayed or neutered and animals that are abandoned or relinquished to shelters because of obedience problems.
+              .item
+                .range.range-xs-justify
+                  .cell-xl-4.cell-lg-5.text-lg-left
+                    h6
+                      a(href='#').text-dark FACTS ABOUT DECLAWING
+                    p.small.
+                      Unlike most mammals who walk on the soles of the
+                      paws or feet, Dogs are digitigrades, which means they walk on their toes. Their back, shoulder, paw and leg joints, muscles, tendons, ligaments and nerves are naturally designed to support and distribute the Dog's weight across its toes as it walks, runs and climbs.
+
+                  .offset-top-40.offset-lg-top-0.cell-xl-4.cell-lg-5.text-lg-right
+                    h6
+                      a(href='#').text-dark COMmon Health Concerns in an Overweight Dog
+                    p.small.
+                      Concerned about how round your Dog has become, or even notice your Dog losing weight too quickly? It's easy for people to realize they've gained too much when their pants get a little snug. When it comes to a feline friend, however, its up to you to watch
+                       for warning signs that she's a little too fluffy.
+
+        .relative
+          .page-counter.page-counter-bottom-2.veil.reveal-lg-block.page-counter-sisal
+            img(src="images/index-08.png" width="378" height="361" alt="").img-responsive.center-block
+
+    section 
+      .shell.shell-wide
+        // RD Google Map
+        .rd-google-map(class="rd-google-map__model", data-zoom='12', data-x='-73.9874068', data-y='40.643180', data-styles='[{"featureType":"administrative.locality","elementType":"all","stylers":[{"hue":"#2c2e33"},{"saturation":7},{"lightness":19},{"visibility":"on"}]},{"featureType":"landscape","elementType":"all","stylers":[{"hue":"#ffffff"},{"saturation":-100},{"lightness":100},{"visibility":"simplified"}]},{"featureType":"poi","elementType":"all","stylers":[{"hue":"#ffffff"},{"saturation":-100},{"lightness":100},{"visibility":"off"}]},{"featureType":"road","elementType":"geometry","stylers":[{"hue":"#bbc0c4"},{"saturation":-93},{"lightness":31},{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"hue":"#bbc0c4"},{"saturation":-93},{"lightness":31},{"visibility":"on"}]},{"featureType":"road.arterial","elementType":"labels","stylers":[{"hue":"#bbc0c4"},{"saturation":-93},{"lightness":-2},{"visibility":"simplified"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"hue":"#e9ebed"},{"saturation":-90},{"lightness":-8},{"visibility":"simplified"}]},{"featureType":"transit","elementType":"all","stylers":[{"hue":"#e9ebed"},{"saturation":10},{"lightness":69},{"visibility":"on"}]},{"featureType":"water","elementType":"all","stylers":[{"hue":"#e9ebed"},{"saturation":-78},{"lightness":67},{"visibility":"simplified"}]}]')
+          ul.map_locations
+            li(data-y='40.643180', data-x='-73.9874068')
+              p
+                | 9870 St Vincent Place, Glasgow, DC 45 Fr 45.
+  // Page Footer
+  include ../sections/_footer-default 

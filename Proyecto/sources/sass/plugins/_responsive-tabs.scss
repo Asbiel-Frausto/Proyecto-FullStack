@@ -1,0 +1,143 @@
+//
+// Easy Responsive Tabs
+// --------------------------------------------------
+
+
+$tabs-btn-height: 40px;
+$tabs-btn-indent: 0;
+
+$tabs-btn-color: #333;
+$tabs-btn-background: #DDD;
+
+$tabs-btn-active-color: #333;
+$tabs-btn-active-background: #FFF;
+
+$tabs-btn-border-radius: 4px;
+$tabs-btn-border: 1px solid #CCC;
+
+$tabs-btn-padding: 10px 20px;
+
+$tab-padding: 20px;
+
+
+.responsive-tabs {
+  position: relative;
+}
+
+.resp-tabs-list {
+  li {
+    cursor: pointer;
+
+    &.resp-tab-active,
+    &:hover {
+      color: $brand-primary;
+    }
+  }
+}
+
+.resp-accordion {
+  display: none;
+}
+
+.resp-tab-content {
+  display: none;
+}
+
+.resp-tab-content-active {
+  display: block;
+}
+
+.responsive-tabs-default {
+  .resp-tabs-list {
+    display: none;
+    word-spacing: $tabs-btn-indent - 4px;
+    margin-bottom: -1px;
+  }
+
+  .resp-accordion, .resp-tabs-list > li {
+    display: inline-block;
+    word-spacing: normal;
+    padding: $tabs-btn-padding;
+    background: $tabs-btn-background;
+    border: $tabs-btn-border;
+    border-top-left-radius: $tabs-btn-border-radius;
+    border-top-right-radius: $tabs-btn-border-radius;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+    transition: .3s all ease;
+
+    &:hover, &.resp-tab-active {
+      color: $tabs-btn-active-color;
+      background: $tabs-btn-active-background;
+    }
+
+    &.resp-tab-active {
+      border-bottom-color: transparent;
+    }
+  }
+
+  .resp-accordion {
+    display: block;
+    border-radius: 0;
+  }
+
+  .resp-tab-content {
+    display: none;
+    padding: $tab-padding;
+    background: $tabs-btn-background;
+    border: $tabs-btn-border;
+    color: $tabs-btn-active-color;
+    background: $tabs-btn-active-background;
+  }
+}
+
+//External buttons (next tab, prev tab)
+
+div[class^="resp-tab-external"] {
+  display: none;
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+
+  @media (min-width: $screen-md-min) {
+    display: block;
+  }
+}
+
+.resp-tabs-extertal-list {
+  position: relative;
+  li {
+    top:0;
+    left: 0;
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    transition: .2s ease-out;
+
+    &.active {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+
+.resp-tab-external-prev {
+  left: -150px;
+}
+
+.resp-tab-external-next {
+  right: -100px;
+}
+
+.responsive-tabs:not(.resp-easy-accordion) {
+  @media (min-width: 768px) {
+    .resp-accordion {
+      display: none;
+    }
+
+    .resp-tabs-list {
+      display: block;
+    }
+  }
+}

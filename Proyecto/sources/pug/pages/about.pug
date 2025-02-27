@@ -1,0 +1,120 @@
+extends  ../_skeleton
+
+block variables
+  - var activeIndex = 3
+
+block title
+  title About us
+
+block page
+  // Page Header
+  include ../sections/_header-default
+
+  // Page Content
+  main.page-content
+    section.section-bottom-65.section-top-34.section-md-top-0
+      .shell.shell-wide
+        .page-counter.page-counter-bottom-5
+          img(src="images/about-01.png"  alt="").img-responsive.center-block
+        .range.range-xs-center.offset-top-0.offset-md-top-40
+          .cell-md-7
+            h4 A few words about us
+
+            p We are a small in-home breeding cattery located northwest in Maryland. Our Puppies are raised underfoot, with lots of love and attention, and are also well-socialized. We are dedicated to producing healthy Puppies with happy personalities. We provide a written health guarantee. Our Dogs produce Puppies in the traditional solid point colors (seal, blue, chocolate, and lilac) of different breeds. The Dogs and Puppies we offer are adorable ones that love their families and get along well with other pets.
+            p.offset-top-26 Our Dog-breeding activity started after we went to our first CFA Dog show in Pikesville, MD back in March 2010 looking to see if we could find a Dog that could be a companion for Vito, our Ragamuffin Dog. We used to breed and show Yorkies and other popular Dog breeds long before 2010, and Vito was always around them. We think that our appearance at that show gave us the confidence in what our cattery should do, and that’s what we’ve been doing ever since.
+
+    section.section-title.section-title-left(data-title='welcome')
+      .shell.shell-wide.section-92.section-lg-bottom-148.bg-img-02
+        hr.divider
+        h4 Breeder’s Reputation and Business Practices
+        .range-xs-center.range-lg-left.range.text-left.offset-top-40.offset-lg-top-80
+          .cell-sm-preffix-1.cell-xs-11.cell-md-8.cell-xl-6
+            ul.list-index.list-index-variant-1
+              li
+                h6.text-primary
+                  span.list-index-counter
+                  | How many litters are raised by the breeder yearly?
+                .list-index-inset
+                  p.offset-top-0 The number of Puppies that a breeder is raising may impact upon its ability to properly socialize and care for each individual Puppy. If there are too many litters then it is possible that the Puppies are not being raised in the best environment.
+              li
+                h6.text-primary
+                  span.list-index-counter
+                  | How has the Puppy been socialized?
+                .list-index-inset
+                  p.offset-top-0 It is very important that the Puppy has the opportunity to socialize with other Dogs and people from an early age. This is particularly important from 6 to 16 weeks of age. Without adequate socialization, the Puppy may end up being nervous and insecure.
+              li
+                h6.text-primary
+                  span.list-index-counter
+                  | What Dog association is the breeder registered with?
+                .list-index-inset
+                  p.offset-top-0 Finding out which association the breeder and it’s blood lines are registered with is only important if you have made the decision to take your Dog to Dog shows. This is because the different Dog associations have different standards and rules.
+    section
+      .shell.shell-wide.section-92.section-lg-122
+        .page-counter.page-counter-middle.page-counter-gray
+          img(src="images/about-03.png" alt="").img-responsive.center-block
+        h4.offset-md-top-80 meet our team
+
+        // Owl Carousel
+        .owl-carousel.offset-top-40.owl-dots-modile(data-dots='true' data-items='1',data-sm-items='2',data-md-items='3', data-margin='30', data-lg-margin='84', data-mouse-drag="false")
+          .thumbnail
+            img(src="images/about-04.jpg" alt="").img-responsive
+            .caption.caption-static
+              h4 Jane Smith
+              p.text-graylight.small.text-bold.text-uppercase owner
+
+          .thumbnail
+            img(src="images/about-05.jpg" alt="").img-responsive
+            .caption.caption-static
+              h4 Caroline Beek
+              p.text-graylight.small.text-bold.text-uppercase breeder
+
+          .thumbnail
+            img(src="images/about-06.jpg" alt="").img-responsive
+            .caption.caption-static
+              h4 Dayle Peters
+              p.text-graylight.small.text-bold.text-uppercase breeder
+
+    section.section-bottom-80.section-title.section-title-right(data-title='dogs for sale')
+      .shell.shell-wide.section-65.section-lg-bottom-122.bg-mocos
+        .page-counter.page-counter-bottom-6.page-counter-sisal
+          img(src="images/about-07.png" alt="").img-responsive.center-block
+        hr.divider.offset-lg-top-54
+        h5 Useful info & advice
+        .range.text-md-left.offset-top-54
+          .cell-md-preffix-1.cell-xl-9.cell-md-10
+            .range
+              .cell-md-4.cell-sm-6
+                .inset-lg-right-14p
+                  h6 Getting a Dog
+                  p.small Get to know where to get a Dog and how to choose one that is right for you and your lifestyle, how to help your new Dog settle in.
+
+              .cell-md-4.cell-sm-6.offset-top-40.offset-sm-top-0
+                .inset-lg-right-14p
+                  h6 Dog health care
+                  p.small Read high quality and accurate Dog health information, designed to be used by owners requiring help and understanding of Dog health conditions.
+
+              .cell-md-4.cell-sm-6.offset-top-40.offset-md-top-0
+                .inset-lg-right-14p
+                  h6 Problem behaviour
+                  p.small Providing an insight into why the behaviour is occurring in the first instance, and how it can be tackled and hopefully solved.
+
+              .cell-md-4.cell-sm-6.offset-top-40
+                .inset-lg-right-14p
+                  h6 General care
+                  p.small Essential information on caring for your Dog. Everything you need to know about getting a Dog and how to keep it happy, healthy and safe.
+
+              .cell-md-4.cell-sm-6.offset-top-40
+                .inset-lg-right-14p
+                  h6 Dog behaviour
+                  p.small Increasing our understanding and knowledge of their behaviour, can only enhance our enjoyment and love of these special animals.
+
+              .cell-md-4.cell-sm-6.offset-top-40
+                .inset-lg-right-14p
+                  h6 Dogs and human health
+                  p.small It is understandable to be concerned about how keeping a Dog could impact on you. Find information on bereavement, Dog hoarding and the benefits of owning a Dog.
+    .shell.shell-wide.inset-left-0.inset-right-0
+      hr.divider-full
+
+
+  // Page Footer
+  include ../sections/_footer-default

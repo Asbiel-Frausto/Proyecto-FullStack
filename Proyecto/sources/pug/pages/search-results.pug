@@ -1,0 +1,25 @@
+extends  ../_skeleton
+
+block variables
+  - var activeIndex = 0
+
+block title
+  title Search results
+
+block page
+  // Page Header
+  include ../sections/_header-default
+
+  // Page Content
+  main.page-content
+    section.section-65
+      .shell
+        h4 Search results
+
+        .rd-search-results.offset-top-34
+
+    .shell.shell-wide.inset-left-0.inset-right-0
+      hr.divider-full
+
+  // Page Footer
+  include ../sections/_footer-default

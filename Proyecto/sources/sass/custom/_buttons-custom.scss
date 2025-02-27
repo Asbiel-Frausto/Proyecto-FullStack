@@ -1,0 +1,141 @@
+//
+// Custom Buttons Styles
+// --------------------------------------------------
+
+// Base styles
+// --------------------------------------------------
+
+.btn {
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  padding: 11px 25px;
+  transition: .2s;
+
+  &:focus,
+  &:active,
+  &:active:focus{
+    outline: none;
+  }
+
+
+  &,
+  &:active,
+  &.active {
+    &:focus,
+    &.focus {
+
+    }
+  }
+
+  &:hover,
+  &:focus,
+  &.focus {
+
+  }
+
+  &:active,
+  &.active {
+    @include box-shadow(none);
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+
+  }
+}
+
+
+// Alternate buttons
+// --------------------------------------------------
+
+.btn-default {
+  @include button-variant-custom($gray-darker, transparent, $gray, $white, $gray-darker, $gray-darker);
+}
+.btn-white {
+  @include button-variant-custom($gray-base, $white, #eeeeee, $white, $gray-darker, $gray-darker);
+}
+
+.btn-primary {
+  @include button-variant-custom($white, $brand-primary, $brand-primary, $white, darken($brand-primary, 15%), darken($brand-primary, 15%));
+}
+
+// Success appears as green
+.btn-success {
+
+}
+
+// Info appears as blue-green
+.btn-info {
+
+}
+
+// Warning appears as orange
+.btn-warning {
+
+}
+
+// Danger and error appear as red
+.btn-danger {
+
+}
+
+
+// Button Sizes
+// --------------------------------------------------
+
+.btn-xs {
+
+}
+
+.btn-sm {
+
+}
+
+.btn-lg {
+  padding:12px 43px;
+  border-radius: 0;
+}
+
+
+// Button Shapes
+// --------------------------------------------------
+
+.btn-rect {
+  border-radius: 0;
+}
+
+
+// Button Icon styles
+// --------------------------------------------------
+
+.btn{
+
+  &.btn-icon {
+    padding-left: 17px;
+    padding-right: 17px;
+
+    .icon {
+      font-size: 28px;
+      line-height: 28px;
+      vertical-align: middle;
+      transition: 0s;
+    }
+
+    &-left{
+      .icon{
+        float: left;
+        padding-right: 10px;
+      }
+    }
+
+    &-right{
+      .icon{
+        float: right;
+        padding-left: 10px;
+      }
+    }
+
+  }
+}

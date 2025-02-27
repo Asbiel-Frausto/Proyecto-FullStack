@@ -1,0 +1,149 @@
+//
+// Search Results
+// --------------------------------------------------
+
+// Base styles
+// --------------------------------------------------
+
+.rd-search{
+  display: flex;
+  justify-content: center;
+
+  .form-group{
+    margin-bottom: 0;
+    display: inline-block;
+
+    @media (min-width: 768px) {
+      width: 370px;
+    }
+  }
+
+  .btn{
+    background-color: transparent;
+    border: none;
+    color: #c9adad;
+    font-size: 18px;
+    padding: 7px 8px;
+
+    &:hover{
+      color: $gray-base;
+    }
+  }
+}
+
+.search_list {
+  text-align: left;
+  padding-left: 0;
+  font-size: 18px;
+  list-style-type: none;
+
+  li div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    white-space: nowrap;
+  }
+
+  li:before {
+    top: 6px;
+    @include transform (translateY(0));
+  }
+
+  li + li {
+    margin-top: 25px;
+  }
+
+  h5 + * {
+    margin-top: 8px;
+  }
+
+  p {
+    margin-bottom: 8px;
+  }
+
+  li:only-child::before {
+    display: none;
+  }
+}
+
+.result-item {
+  padding-left: 20px;
+  list-style-type: decimal;
+  margin-left: 40px;
+  color: $gray-dark;
+  > * {
+    color: $gray-darker;
+  }
+  p {
+    font-size: $font-size-base;
+  }
+
+  + .result-item {
+    margin-top: 40px;
+  }
+  @media (min-width: $screen-sm-min) {
+    padding-left: 40px;
+  }
+}
+
+.search_title {
+  color: $gray-base;
+}
+
+.match {
+  font-size: $font-size-small;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: $brand-primary;
+  em {
+    font-style: normal;
+  }
+}
+
+.search {
+  color: #fff;
+  background: $brand-primary;
+}
+
+#rd-search-results-live{
+  #search-results {
+    background: $white;
+    box-shadow: $shadow-area-xs;
+    border-top: 1px solid $gray;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.33s all ease-in;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    &.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    .result-item {
+      padding-left: 15px;
+    }
+
+    p.match {
+      font-size: 14px;
+      letter-spacing: 0;
+
+      em {
+        display: block;
+      }
+    }
+    .result-item {
+      + .result-item {
+        margin-top: 20px;
+      }
+    }
+    .search_all{
+      margin-top: 20px;
+      a{
+        &:hover{
+          color: $brand-primary;
+        }
+      }
+    }
+  }
+}

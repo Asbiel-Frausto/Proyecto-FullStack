@@ -1,0 +1,40 @@
+extends  ../_skeleton
+
+block variables
+  - var activeIndex = 0
+
+block title
+  title 404
+
+block page
+  // Page Header
+  include ../sections/_header-default
+
+  // Page Content
+  main.page-content
+    // Privacy Policy
+    section.sec-404.section-bottom-80.section-title.section-title-left.section-title-left-3(data-title='sorry')
+      .shell.shell-wide.sec-404-img
+        .range.range-xs-center
+          .cell-md-10
+            .sec-404-title
+              span.big 404
+              <br class=''>page
+            p.offset-top-40 The page you are looking for might have been removed, had its name changed, or is temporarily unavailable. <br class='veil reveal-md-block'>Please try using our search box below to look for information on the website.
+            // RD Search
+            form.offset-top-54.rd-search(action="search-results.html", method="GET", data-search-live="rd-search-results-live")
+              .form-group
+                label(for="rd-search-form-input" class="form-label") Search
+                input(class="form-control" id="rd-search-form-input" type="text" name="s" autocomplete="off")
+              button.btn.fa-search
+
+
+  .shell.shell-wide.inset-left-0.inset-right-0
+    hr.divider-full
+
+  // Page Footer
+  include ../sections/_footer-default
+
+//- block coded by NAME
+block coder
+  // Coded by Mnemon1k

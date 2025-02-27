@@ -1,0 +1,46 @@
+/*
+* Fullwidth Layout
+*/
+
+.rd-navbar-fullwidth {
+  display: block;
+
+  // RD Navbar Panel
+  .rd-navbar-panel{
+  }
+
+  .rd-navbar-inner{
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  // RD Navbar nav wrap
+  .rd-navbar-nav-wrap{
+    margin-top: 30px;
+  }
+
+  // RD Navbar Nav
+  .rd-navbar-nav {
+    width: 100%;
+
+    > li + li {
+      margin-left: $navbar-fullwidth-nav-indent;
+    }
+  }
+
+  // RD Navbar States
+  &.rd-navbar--is-stuck {
+    .rd-navbar-inner {
+      padding-top: 13px;
+      padding-bottom: 15px;
+    }
+
+    .rd-navbar-nav-wrap{
+      margin-top: 0;
+    }
+
+    .rd-navbar-panel{
+      display: none;
+    }
+  }
+}
