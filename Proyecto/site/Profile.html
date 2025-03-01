@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="en">
+  <head>
+    <!-- Site Title-->
+    <title>User Profile</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <!-- Stylesheets-->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7COpen+Sans:300,300italic,400,600,700,900">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Calendar Plugin (FullCalendar) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css">
+    <!--[if lt IE 10]>
+    <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+    <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <!-- Preloader-->
+    <div class="preloader loaded">
+      <div class="preloader-body">
+        <div class="cssload-container">
+          <div class="cssload-speeding-wheel"></div>
+        </div>
+        <p>Loading...</p>
+      </div>
+    </div>
+    <!-- Page-->
+    <div class="page text-center">
+      <!-- Page Header-->
+      <header class="page-head">
+        <!-- RD Navbar-->
+        <div class="rd-navbar-wrap">
+          <nav class="rd-navbar" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-sm-device-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fullwidth" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-static" data-sm-stick-up-offset="50px" data-lg-stick-up-offset="90px">
+            <div class="rd-navbar-inner">
+              <!-- RD Navbar Panel-->
+              <div class="rd-navbar-panel">
+                <!-- RD Navbar Toggle-->
+                <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                <!-- RD Navbar Brand-->
+                <div class="rd-navbar-brand"><a class="brand-name" href="index.html"><img src="images/logo.png" width="250" height="100" alt=""></a></div>
+              </div>
+              <div class="rd-navbar-nav-wrap">
+                <!-- RD Navbar Nav-->
+                <ul class="rd-navbar-nav">
+                  <li><a href="./">Home page</a></li>
+                  <li><a href="gallery.html">Gallery</a></li>
+                  <li><a href="about.html">About us</a></li>
+                  <li><a href="Services.html">Servicios</a></li>
+                  <li class="active"><a href="profile.html">Perfil</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <!-- Page Content-->
+      <main class="page-content">
+        <!-- User Profile Section -->
+        <section class="section-bottom-65 section-top-34 section-md-top-0">
+          <div class="shell shell-wide">
+            <div class="range range-xs-center offset-top-0 offset-md-top-40">
+              <div class="cell-md-8">
+                <h4>Perfil de Usuario</h4>
+                <div class="user-profile">
+                  <div class="profile-image">
+                    <img src="images/user-avatar.jpg" alt="User Avatar" class="img-responsive img-circle" width="150" height="150">
+                    <button class="btn btn-primary btn-sm" id="edit-profile-image">Editar Imagen</button>
+                  </div>
+                  <div class="profile-info">
+                    <h5 id="user-name">Nombre del Usuario</h5>
+                    <p id="user-email">correo@example.com</p>
+                    <button class="btn btn-primary" id="edit-profile">Editar Perfil</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Pets Section -->
+        <section class="section-bottom-80 section-title section-title-left" data-title="mascotas">
+          <div class="shell shell-wide">
+            <h4>Mis Mascotas</h4>
+            <div class="range range-xs-center offset-top-40">
+              <div class="cell-md-8">
+                <div class="pets-grid">
+                  <!-- Pet Card -->
+                  <div class="pet-card">
+                    <img src="images/pet-01.jpg" alt="Pet Image" class="img-responsive">
+                    <h6>Nombre de la Mascota</h6>
+                    <p>Raza: <span>Raza</span></p>
+                    <p>Edad: <span>Edad</span></p>
+                    <button class="btn btn-primary btn-sm" id="edit-pet">Editar</button>
+                    <button class="btn btn-danger btn-sm" id="delete-pet">Eliminar</button>
+                  </div>
+                  <!-- Add Pet Button -->
+                  <div class="pet-card add-pet">
+                    <button class="btn btn-primary" id="add-pet">+ Agregar Mascota</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Reservations Section -->
+        <section class="section-bottom-80 section-title section-title-left" data-title="reservaciones">
+          <div class="shell shell-wide">
+            <h4>Mis Reservaciones</h4>
+            <div class="range range-xs-center offset-top-40">
+              <div class="cell-md-8">
+                <div class="reservations-list">
+                  <!-- Reservation Item -->
+                  <div class="reservation-item">
+                    <h6>Reservación #1</h6>
+                    <p>Fecha: <span>01/01/2023</span></p>
+                    <p>Hora: <span>10:00 AM</span></p>
+                    <p>Servicio: <span>Baño y Corte</span></p>
+                    <button class="btn btn-primary btn-sm" id="edit-reservation">Editar</button>
+                    <button class="btn btn-danger btn-sm" id="cancel-reservation">Cancelar</button>
+                  </div>
+                  <!-- Add Reservation Button -->
+                  <div class="reservation-item add-reservation">
+                    <button class="btn btn-primary" id="new-reservation">+ Nueva Reservación</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- New Reservation Section -->
+        <section class="section-bottom-80 section-title section-title-left" data-title="nueva-reservacion">
+          <div class="shell shell-wide">
+            <h4>Agendar Nueva Cita</h4>
+            <div class="range range-xs-center offset-top-40">
+              <div class="cell-md-8">
+                <div id="calendar"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <!-- Page Footer-->
+      <footer class="page-footer">
+        <div class="container"><span>&#169;</span> <span id="copyright-year"></span>
+          <hr class="divider divider-default divider-vertical"><a href="privacy.html">Privacy policy</a>
+        </div>
+      </footer>
+    </div>
+    <!-- Global Mailform Output-->
+    <div class="snackbars" id="form-output-global"></div>
+    <!-- Java script-->
+    <script src="js/core.min.js"></script>
+    <script src="js/script.js"></script>
+    <!-- FullCalendar Script -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth',
+          headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          },
+          events: [
+            {
+              title: 'Cita de Baño',
+              start: '2023-10-10T10:00:00',
+              end: '2023-10-10T12:00:00'
+            }
+          ]
+        });
+        calendar.render();
+      });
+    </script>
+  </body>
+</html>
