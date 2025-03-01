@@ -35906,6 +35906,9 @@ a.pswp__share--download:hover {
 	}
 }
 
+
+
+
 .service-item {
     margin-bottom: 20px; /* Espacio entre cada servicio */
     padding: 10px; /* Espacio interior de cada servicio */
@@ -35945,5 +35948,97 @@ a.pswp__share--download:hover {
   object-fit: cover; /* Asegura que la imagen se recorte correctamente sin deformarse */
   }
 
+  .img-responsive-mascotas {
+    width: 100%; /* Para que se ajuste al contenedor */
+    height: 500px; /* Puedes ajustar esta altura según prefieras */
+    object-fit: cover; /* Recorta la imagen para llenar el contenedor sin deformarla */
+    border-radius: 10px; /* Opcional: bordes redondeados */
+}
+
+
+
+
+/* Contenedor principal de la galería */
+.gallery {
+	display: flex;
+	flex-wrap: wrap; /* Permite que los elementos se acomoden en varias líneas si es necesario */
+	justify-content: center; /* Centra los items horizontalmente */
+	gap: 40px; /* Espacio entre los consejos */
+	margin-top: 30px; /* Espacio superior */
+  }
+  
+  /* Cada item dentro de la galería */
+  .gallery-itemss {
+	display: flex;
+	flex-direction: column; /* Las imágenes y los textos estarán en columna */
+	justify-content: center; /* Centra los elementos dentro de cada item */
+	align-items: center; /* Alinea los elementos al centro */
+	width: 100%; /* Toma el 100% del espacio disponible */
+	max-width: 350px; /* Asegura que los items no crezcan demasiado */
+	text-align: center; /* Centra el texto */
+	gap: 20px; /* Espacio entre el texto y la imagen */
+	margin-bottom: 30px; /* Espacio entre cada consejo */
+  }
+  
+  /* Estilo para las imágenes */
+  .image-containerss {
+	width: 100%; /* Ocupa todo el ancho disponible */
+	display: flex;
+	justify-content: center; /* Centra la imagen dentro del contenedor */
+  }
+  
+  .image-containerss img {
+	width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
+	max-width: 300px; /* Limita el tamaño máximo de la imagen */
+	height: auto; /* Mantiene la proporción de la imagen */
+  }
+  
+  /* Estilo para el texto */
+  .text-containerss {
+	width: 100%; /* El texto toma el 100% del espacio disponible */
+	font-size: 1.1rem; /* Ajustar tamaño del texto */
+	line-height: 1.6; /* Aumentar altura de línea para mejor legibilidad */
+	padding: 0 15px; /* Añade un poco de padding para que no esté tan pegado al borde */
+  }
+  
+  /* Títulos */
+  .text-containerss h5 {
+	font-size: 1.25rem; /* Ajusta el tamaño de los títulos */
+	font-weight: bold;
+	margin-bottom: 10px;
+  }
+  
+  /* Ajuste para pantallas más grandes */
+  @media screen and (min-width: 768px) {
+	.gallery-itemss {
+	  width: 48%; /* En pantallas más grandes, cada item ocupa el 48% del espacio */
+	}
+  
+	.image-containerss img {
+	  max-width: 400px; /* Ajusta el tamaño máximo de la imagen en pantallas grandes */
+	}
+  }
+  
+  /* Ajuste para pantallas más pequeñas */
+  @media screen and (max-width: 767px) {
+	.gallery-itemss {
+	  width: 100%; /* En pantallas pequeñas, cada item ocupa el 100% del espacio */
+	}
+  
+	.image-containerss img {
+	  max-width: 100%; /* Asegura que las imágenes no excedan el 100% en pantallas pequeñas */
+	}
+  
+	.text-containerss {
+	  padding: 0 10px; /* Ajusta el padding en pantallas pequeñas */
+	}
+  }
+  
+
+  
+  
+  
+  
+  
 
 
