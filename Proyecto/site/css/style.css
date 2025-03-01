@@ -35996,7 +35996,7 @@ a.pswp__share--download:hover {
   /* Estilo para el texto */
   .text-containerss {
 	width: 100%; /* El texto toma el 100% del espacio disponible */
-	font-size: 1.1rem; /* Ajustar tamaño del texto */
+	font-size: 1.3rem; /* Ajustar tamaño del texto */
 	line-height: 1.6; /* Aumentar altura de línea para mejor legibilidad */
 	padding: 0 15px; /* Añade un poco de padding para que no esté tan pegado al borde */
   }
