@@ -1,7 +1,6 @@
 import { auth, db } from "./firebaseConfig.js";
 import {
   sendEmailVerification,
-  signInWithPopup,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
@@ -60,6 +59,10 @@ document.addEventListener("DOMContentLoaded", () => {
         email: email,
         fotoPerfilUsuario: ""
       });
+
+      // Redirigir al usuario a la página de inicio de sesión después del registro
+      loginSection.style.display = 'block';
+      registerSection.style.display = 'none';
     } catch (error) {
       const errorCode = error.code;
       if (errorCode === "auth/email-already-in-use") alert("El correo ya está en uso");
@@ -70,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Evento para iniciar sesión
-  inicioSesionBtn?.addEventListener("click", (event) => {
+  inicioSesionBtn?.addEventListener("click", async (event) => {
     event.preventDefault();
     const email = document.getElementById("emailLogIn").value;
     const password = document.getElementById("passwordLogIn").value;
@@ -84,39 +87,46 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then(async (userCredential) => {
-        const user = userCredential.user;
-        await user.reload();
-        if (!user.emailVerified) {
-          alert("Por favor, verifica tu correo antes de acceder.");
-          await signOut(auth);
-        } else {
-          window.location.href = "Profile.html";
-        }
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        if (errorCode === "auth/invalid-credential") alert("Credenciales inválidas. Verifica tu correo y contraseña.");
-        else if (errorCode === "auth/user-not-found") alert("El usuario no existe. Regístrate primero.");
-        else if (errorCode === "auth/wrong-password") alert("Contraseña incorrecta.");
-        else if (errorCode === "auth/invalid-email") alert("El correo electrónico no tiene registrada una cuenta.");
-        else if (errorCode === "auth/user-disabled") alert("El usuario ha sido deshabilitado.");
-        else alert("Ocurrió un error inesperado. Inténtalo de nuevo.");
-      });
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Verificar si el correo está verificado
+      if (!user.emailVerified) {
+        alert("Por favor, verifica tu correo antes de acceder.");
+        await signOut(auth); // Cerrar sesión si el correo no está verificado
+        window.location.href = "verify-email.html"; // Redirigir a una página de verificación
+        return;
+      }
+
+      // Redirigir al perfil solo si el correo está verificado
+      window.location.href = "profile.html";
+    } catch (error) {
+      const errorCode = error.code;
+      if (errorCode === "auth/invalid-credential") alert("Credenciales inválidas. Verifica tu correo y contraseña.");
+      else if (errorCode === "auth/user-not-found") alert("El usuario no existe. Regístrate primero.");
+      else if (errorCode === "auth/wrong-password") alert("Contraseña incorrecta.");
+      else if (errorCode === "auth/invalid-email") alert("El correo electrónico no tiene registrada una cuenta.");
+      else if (errorCode === "auth/user-disabled") alert("El usuario ha sido deshabilitado.");
+      else alert("Ocurrió un error inesperado. Inténtalo de nuevo.");
+    }
   });
 
-  // Verificar el estado del usuario y redirigir si es necesario
+  // Verificar el estado del usuario y evitar redirección automática en la página de inicio de sesión
   onAuthStateChanged(auth, (user) => {
+    console.log("Estado de autenticación:", user);
     if (user) {
-      if (user.emailVerified) {
-        window.location.href = "Profile.html";
+      if (user.emailVerified && !window.location.pathname.includes("profile.html")) {
+        console.log("Redirigiendo a profile.html");
+        window.location.href = "profile.html";
       } else {
-        signOut(auth).then(() => {
-          alert("Por favor, verifica tu correo antes de acceder.");
-        }).catch((error) => {
-          console.error("Error al cerrar sesión:", error);
-        });
+        console.log("El usuario ya está en profile.html o no está verificado");
+      }
+    } else {
+      // Verifica si el usuario está en la página de inicio de sesión
+      if (!window.location.pathname.includes("login.html")) {
+        console.log("No hay usuario autenticado, redirigiendo a index.html");
+        window.location.href = "index.html";
       }
     }
   });

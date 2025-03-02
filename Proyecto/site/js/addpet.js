@@ -1,16 +1,22 @@
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+// Configuración de Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyDQnm26chDep3exS44pLZ7xQKRi5B0REZY",
+  authDomain: "happy-tails-cbb79.firebaseapp.com",
+  projectId: "happy-tails-cbb79",
+  storageBucket: "happy-tails-cbb79.appspot.com",
+  messagingSenderId: "868647766575",
+  appId: "1:868647766575:web:3d7bcd02545bf9621814da",
+};
 
 // Inicializar Firebase
-const auth = getAuth();
-const db = getFirestore();
-const storage = getStorage();
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
 
 document.addEventListener("DOMContentLoaded", () => {
   const petForm = document.getElementById("petForm");
 
-  onAuthStateChanged(auth, async (user) => {
+  auth.onAuthStateChanged(async (user) => {
     if (!user) {
       alert("Debes iniciar sesión.");
       window.location.href = "index.html"; // Redirigir a la página principal
@@ -25,8 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const petAge = document.getElementById("petAge").value.trim();
       const petBreed = document.getElementById("petBreed").value.trim();
       const petDescription = document.getElementById("petDescription").value.trim();
-      const petImage = document.getElementById("petImage").files[0];
 
+      // Validar que todos los campos obligatorios estén llenos
       if (!petName || !petAge || !petBreed || !petDescription) {
         alert("Todos los campos son obligatorios.");
         return;
@@ -35,29 +41,20 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         // Generar un ID único para la mascota
         const petID = crypto.randomUUID();
-        let petImageURL = "";
-
-        // Si el usuario subió una imagen, guardarla en Firebase Storage
-        if (petImage) {
-          const imageRef = ref(storage, `users/${user.uid}/pets/${petID}`);
-          await uploadBytes(imageRef, petImage);
-          petImageURL = await getDownloadURL(imageRef);
-        }
 
         // Guardar datos de la mascota en la subcolección 'pets' dentro del usuario
-        await setDoc(doc(db, "users", user.uid, "pets", petID), {
+        await db.collection("users").doc(user.uid).collection("pets").doc(petID).set({
           IDpet: petID,
           descripcion: petDescription,
           edad: petAge,
           nombre: petName,
           raza: petBreed,
           ownerUID: user.uid, // ID del dueño de la mascota
-          fotoPerfilMascota: petImageURL, // URL de la imagen de la mascota
         });
 
         alert("Mascota registrada con éxito.");
-        petForm.reset();
-        window.location.href = "dashboard.html"; // Redirigir tras éxito
+        petForm.reset(); // Limpiar el formulario
+        window.location.href = "profile.html"; // Redirigir a la página de perfil
       } catch (error) {
         console.error("Error al registrar la mascota:", error);
         alert("Hubo un error al registrar la mascota.");
