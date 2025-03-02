@@ -1,3 +1,14 @@
+import { auth, db } from "./firebaseConfig.js";
+import {
+  sendEmailVerification,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
 // Obtener referencias a los enlaces y secciones
 const showRegisterLink = document.getElementById('show-register');
 const showLoginLink = document.getElementById('show-login');
@@ -6,45 +17,17 @@ const registerSection = document.getElementById('register-section');
 
 // Mostrar la sección de registro y ocultar la de inicio de sesión
 showRegisterLink?.addEventListener('click', (e) => {
-  e.preventDefault(); // Evitar que el enlace recargue la página
+  e.preventDefault();
   loginSection.style.display = 'none';
   registerSection.style.display = 'block';
 });
 
 // Mostrar la sección de inicio de sesión y ocultar la de registro
 showLoginLink?.addEventListener('click', (e) => {
-  e.preventDefault(); // Evitar que el enlace recargue la página
+  e.preventDefault();
   registerSection.style.display = 'none';
   loginSection.style.display = 'block';
 });
-
-// Importación correcta de Firebase con la versión 10.7.1
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {
-  sendEmailVerification,
-  getAuth,
-  signInWithPopup,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-// Configuración correcta de Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyDQnm26chDep3exS44pLZ7xQKRi5B0REZY",
-  authDomain: "happy-tails-cbb79.firebaseapp.com",
-  projectId: "happy-tails-cbb79",
-  storageBucket: "happy-tails-cbb79.appspot.com",
-  messagingSenderId: "868647766575",
-  appId: "1:868647766575:web:3d7bcd02545bf9621814da",
-};
-
-// Inicialización de Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
 
 // Se asegura que el código se ejecute solo cuando el DOM esté completamente cargado
 document.addEventListener("DOMContentLoaded", () => {
@@ -69,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const user = userCredential.user;
       await sendEmailVerification(user);
       alert("Usuario creado. Se ha enviado un correo de verificación");
-      
+
       // Guardar el uid en Firestore
       await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,

@@ -441,6 +441,13 @@
         if (event.target === modal) {
           modal.style.display = 'none';
         }
+      }); //se encarga de mandar a otra pagina para poder agregar las mascotas y reservaciones
+      document.getElementById("add-pet").addEventListener("click", () => {
+        window.location.href = "addpet.html";
+      });
+      document.getElementById("add-reservation").addEventListener("click", () => {
+        window.location.href = "bookings.html";
+        
       });
     });
   </script>
