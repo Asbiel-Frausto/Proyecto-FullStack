@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Reservación</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <div class="page text-center">
+        <!-- Encabezado y navegación -->
+        <header class="page-head">
+            <div class="rd-navbar-wrap">
+                <nav class="rd-navbar" data-layout="rd-navbar-fixed">
+                    <div class="rd-navbar-inner">
+                        <div class="rd-navbar-panel">
+                            <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                            <div class="rd-navbar-brand">
+                                <a class="brand-name" href="index.html"><img src="images/logo.png" width="200" height="100" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="rd-navbar-nav-wrap">
+                            <ul class="rd-navbar-nav">
+                                <li><a href="./">Inicio</a></li>
+                                <li><a href="gallery.html">Galería</a></li>
+                                <li><a href="about.html">Sobre nosotros</a></li>
+                                <li><a href="services.html">Servicios</a></li>
+                                <li><a href="login.html">Iniciar sesión</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Contenido principal -->
+        <main class="page-content">
+            <section class="section-bottom-80 section-title section-title-left-3">
+                <div class="shell shell-wide">
+                    <h4 class="offset-top-54">Registrar Reservación</h4>
+                    <div class="range range-xs-center offset-top-26">
+                        <div class="cell-md-8 text-md-left">
+                            <div class="form-container">
+                                <form id="registroForm">
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label for="servicio">Servicio:</label>
+                                            <select id="servicio" name="servicio" class="form-control" required>
+                                                <option value="hospedaje">Hospedaje</option>
+                                                <option value="visitas a hogar">Visitas a Hogar</option>
+                                                <option value="paseos">Paseos</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="fechaLlegada">Fecha de Llegada:</label>
+                                            <input type="text" id="fechaLlegada" name="fechaLlegada" class="form-control" placeholder="Seleccione la fecha" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="fechaSalida">Fecha de Salida:</label>
+                                            <input type="text" id="fechaSalida" name="fechaSalida" class="form-control" placeholder="Seleccione la fecha" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Mascotas:</label>
+                                            <div class="mascotas-list" id="mascotas-list">
+                                                <!-- Aquí se cargarán las mascotas del usuario -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="button-group">
+                                        <button type="submit" class="btn btn-primary">Registrar</button>
+                                        <button class="btn btn-secondary" onclick="window.location.href='Profile.html'">Volver</button>
+                                    </div>
+                                </form>
+                                <p><strong>Total a Pagar:</strong> <span id="totalPagar">0</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Pie de página -->
+        <footer class="page-footer">
+            <div class="container">
+                <span>&#169;</span> <span id="copyright-year"></span>
+                <hr class="divider divider-default divider-vertical">
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/core.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script type="module" src="js/Reservaciones.js"></script>
+</body>
+</html>
