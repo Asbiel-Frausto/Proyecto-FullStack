@@ -122,11 +122,13 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         console.log("El usuario ya está en profile.html o no está verificado");
       }
+
+      // Mostrar el correo del usuario en la página
+      mostrarDatosPerfil(user.email);
     } else {
       // Verifica si el usuario está en la página de inicio de sesión
       if (!window.location.pathname.includes("login.html")) {
-        console.log("No hay usuario autenticado, redirigiendo a index.html");
-        window.location.href = "index.html";
+        console.log("No hay usuario autenticado, redirigiendo a LogIn.html");
       }
     }
   });
@@ -134,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Manejo de cierre de sesión
 document.addEventListener("DOMContentLoaded", () => {
-  const CerrarSesion = document.getElementById("CerrarSesion");
+  const CerrarSesion = document.getElementById("logout-button");
   CerrarSesion?.addEventListener("click", () => {
     signOut(auth).then(() => {
       alert("Sesión cerrada correctamente.");
@@ -145,3 +147,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+// Función para mostrar el correo en la página
+function mostrarDatosPerfil(email) {
+  const EmailElement = document.getElementById("user-email");
+  if (EmailElement) {
+    EmailElement.textContent = `${email}`;
+  }
+}

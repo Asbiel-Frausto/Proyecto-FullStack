@@ -228,6 +228,24 @@
     #cancelDelete:hover {
       background-color: #5a6268;
     }
+
+    /* Estilos para el botón de Cerrar Sesión */
+    .btn-danger {
+      background-color: #dc3545; /* Rojo */
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 0; /* Sin bordes redondeados */
+      cursor: pointer;
+      font-size: 0.8em;
+      text-align: center;
+      display: inline-block;
+      margin: 5px;
+    }
+
+    .btn-danger:hover {
+      background-color: #c82333; /* Rojo más oscuro al pasar el mouse */
+    }
   </style>
 </head>
 <body>
@@ -285,6 +303,7 @@
                   <h5 id="user-name">Nombre del Usuario</h5>
                   <p id="user-email">correo@example.com</p>
                   <button class="btn btn-primary" id="edit-profile">Editar Perfil</button>
+                  <button class="btn btn-danger" id="logout-button">Cerrar Sesión</button>
                 </div>
               </div>
             </div>
@@ -384,8 +403,8 @@
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales/es.min.js"></script>
   <script>
+    // Calendario en español
     document.addEventListener('DOMContentLoaded', function () {
-      // Calendario en español
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
@@ -441,15 +460,19 @@
         if (event.target === modal) {
           modal.style.display = 'none';
         }
-      }); //se encarga de mandar a otra pagina para poder agregar las mascotas y reservaciones
+      });
+
+      // Redirigir a la página de agregar mascotas
       document.getElementById("add-pet").addEventListener("click", () => {
         window.location.href = "addpet.html";
       });
-      document.getElementById("add-reservation").addEventListener("click", () => {
+
+      // Redirigir a la página de nueva reservación
+      document.getElementById("new-reservation").addEventListener("click", () => {
         window.location.href = "bookings.html";
-        
       });
     });
   </script>
+  <script type="module" src="js/login.js"></script>
 </body>
 </html>
