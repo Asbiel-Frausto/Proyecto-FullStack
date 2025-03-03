@@ -1,17 +1,7 @@
-// Configuración de Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyDQnm26chDep3exS44pLZ7xQKRi5B0REZY",
-  authDomain: "happy-tails-cbb79.firebaseapp.com",
-  projectId: "happy-tails-cbb79",
-  storageBucket: "happy-tails-cbb79.appspot.com",
-  messagingSenderId: "868647766575",
-  appId: "1:868647766575:web:3d7bcd02545bf9621814da",
-};
-
-import { auth, db } from "./firebaseConfig.js";
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+// Importa los módulos de Firebase y la configuración desde firebaseConfig.js
+import { auth, db } from "./firebaseConfig.js";  // Asegúrate de que la ruta sea correcta
+import { doc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"; // 👈 Importa onAuthStateChanged correctamente
-
 
 // Obtener el formulario
 const petForm = document.getElementById("petForm");
@@ -111,7 +101,7 @@ async function loadPets() {
             </div>
             <h6 class="pet-name">${petData.nombre}</h6>
             <div class="pet-actions">
-              <button class="btn-icon edit-pet" data-pet-id="${doc.id}"><i class="fas fa-edit"></i></button>
+              <!-- Solo mostrar el botón de eliminar -->
               <button class="btn-icon delete-pet" data-pet-id="${doc.id}"><i class="fas fa-trash"></i></button>
             </div>
           </div>
@@ -146,7 +136,6 @@ async function loadPets() {
   }
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -163,6 +152,24 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", (event) => {
     if (event.target && event.target.id === "add-pet") {
       window.location.href = "addpet.html"; // Redirigir a la página de agregar mascota
+    }
+  });
+
+  // Delegación de eventos para borrar mascotas
+  petsGrid.addEventListener("click", async (event) => {
+    if (event.target && event.target.classList.contains("delete-pet")) {
+      event.stopPropagation();  // Evita que el clic en el botón de borrar dispare el evento de expansión de detalles
+      const petId = event.target.getAttribute("data-pet-id");
+      try {
+        // Eliminar la mascota de Firestore usando el ID
+        const petRef = doc(db, "pets", petId); // Referencia al documento de la mascota
+        await deleteDoc(petRef);  // Eliminar el documento
+        alert('Mascota eliminada correctamente.');
+        loadPets(); // Recargar las mascotas después de eliminar
+      } catch (error) {
+        console.error("Error al eliminar la mascota:", error);
+        alert("Hubo un problema al eliminar la mascota.");
+      }
     }
   });
 });
