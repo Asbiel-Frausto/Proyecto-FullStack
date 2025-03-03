@@ -5,13 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Mascota</title>
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7COpen+Sans:300,300italic,400,600,700,900">
     <link rel="stylesheet" href="css/style.css">
     <script type="module" src="addPet.js"></script>
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <div class="page text-center">
-        <!-- Header -->
         <header class="page-head">
             <div class="rd-navbar-wrap">
                 <nav class="rd-navbar" data-layout="rd-navbar-fixed">
@@ -19,7 +75,7 @@
                         <div class="rd-navbar-panel">
                             <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                             <div class="rd-navbar-brand">
-                                <a class="brand-name" href="index.html"><img src="images/logo.png" width="250" height="100" alt=""></a>
+                                <a class="brand-name" href="index.html"><img src="images/logo.png" width="200" height="100" alt=""></a>
                             </div>
                         </div>
                         <div class="rd-navbar-nav-wrap">
@@ -35,7 +91,7 @@
                 </nav>
             </div>
         </header>
-        <!-- Main Content -->
+
         <main class="page-content">
             <section class="section-bottom-80 section-title section-title-left-3">
                 <div class="shell shell-wide">
@@ -44,31 +100,40 @@
                         <div class="cell-md-8 text-md-left">
                             <div class="form-container">
                                 <form id="petForm">
-                                    <label for="petName">Nombre:</label>
-                                    <input type="text" id="petName" name="petName" class="form-control" required>
-                                    
-                                    <label for="petAge">Edad:</label>
-                                    <input type="number" id="petAge" name="petAge" class="form-control" required>
-                                    
-                                    <label for="petBreed">Raza:</label>
-                                    <input type="text" id="petBreed" name="petBreed" class="form-control" required>
-                                    
-                                    <label for="petDescription">Descripción:</label>
-                                    <textarea id="petDescription" name="petDescription" class="form-control" required></textarea>
-                                    
-                                    <label for="petImage">Foto:</label>
-                                    <input type="file" id="petImage" name="petImage" accept="image/*" class="form-control">
-                                    
-                                    <button type="submit" class="btn btn-primary">Agregar Mascota</button>
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label for="petName">Nombre:</label>
+                                            <input type="text" id="petName" name="petName" class="form-control" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="petAge">Edad:</label>
+                                            <input type="number" id="petAge" name="petAge" class="form-control" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="petBreed">Raza:</label>
+                                            <input type="text" id="petBreed" name="petBreed" class="form-control" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="petDescription">Descripción:</label>
+                                            <textarea id="petDescription" name="petDescription" class="form-control" required></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="button-group">
+                                        <button type="submit" class="btn btn-primary">Agregar Mascota</button>
+                                        <button class="btn btn-secondary" onclick="window.location.href='index.html'">Volver</button>
+                                    </div>
                                 </form>
-                                <button class="btn btn-secondary" onclick="window.location.href='index.html'">Volver</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
         </main>
-        <!-- Footer -->
+
         <footer class="page-footer">
             <div class="container">
                 <span>&#169;</span> <span id="copyright-year"></span>
@@ -81,3 +146,4 @@
     <script src="js/script.js"></script>
 </body>
 </html>
+
