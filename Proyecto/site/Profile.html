@@ -315,34 +315,36 @@
         </div>
     </div>
 
-            <!-- Reservations Section -->
-            <div class="grid-item">
-              <h4>Mis Reservaciones</h4>
-              <div class="reservations-list">
-                <!-- Reservation Item -->
-                <div class="reservation-card">
-                  <div class="reservation-header">
-                    <h6>Reservación #1</h6>
-                    <div class="reservation-actions">
-                      <button class="btn-icon edit-reservation"><i class="fas fa-edit"></i></button>
-                      <button class="btn-icon cancel-reservation"><i class="fas fa-times"></i></button>
-                    </div>
-                  </div>
-                  <div class="reservation-details">
-                    <p><strong>Fecha:</strong> <span>01/01/2023</span></p>
-                    <p><strong>Hora:</strong> <span>10:00 AM</span></p>
-                    <p><strong>Servicio:</strong> <span>Baño y Corte</span></p>
-                  </div>
-                </div>
-                <!-- Add Reservation Button -->
-                <div class="add-reservation">
-                  <button class="btn btn-primary" id="new-reservation"><i class="fas fa-plus"></i> Nueva Reservación</button>
-                </div>
-              </div>
-            </div>
-          </div>
+    <div class="grid-item">
+        <h4>Mis Reservaciones</h4>
+        <div class="reservations-list">
+            <!-- Aquí se cargarán las reservaciones dinámicamente -->
         </div>
-      </section>
+    </div>
+    
+    <!-- Formulario para nueva reservación -->
+    <form id="registroForm" class="reservation-form" style="display: none;">
+      <label for="servicio">Servicio:</label>
+      <select id="servicio">
+        <option value="hospedaje">Hospedaje</option>
+        <option value="visitas a hogar">Visitas a hogar</option>
+        <option value="paseos">Paseos</option>
+      </select>
+      
+      <label for="fechaLlegada">Fecha de Llegada:</label>
+      <input type="date" id="fechaLlegada" required>
+      
+      <label for="fechaSalida">Fecha de Salida:</label>
+      <input type="date" id="fechaSalida" required>
+      
+      <div id="mascotas-list"></div> <!-- Aquí se mostrarán las mascotas -->
+      
+      <div id="totalPagar">Total a pagar: $0</div> <!-- Muestra el total a pagar -->
+      
+      <button type="submit" class="btn btn-success">Registrar Reservación</button>
+    </form>
+  </div>
+  
 
       <!-- New Reservation Section -->
       <section class="section-bottom-80 section-title section-title-left" data-title="nueva-reservacion">
@@ -452,5 +454,6 @@
   </script>
   <script type="module" src="js/login.js" ></script>
   <script type="module" src="js/addpet.js"></script>
+  <script type="module" src="js/Reservaciones.js"></script>
 </body>
 </html>
