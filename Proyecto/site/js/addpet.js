@@ -99,40 +99,53 @@ async function loadPets() {
       // Generar tarjetas para cada mascota
       querySnapshot.forEach((doc) => {
         const petData = doc.data();
-        const petCard = `
-          <div class="pet-card">
-            <div class="pet-card-header">
-              <div class="pet-image-container">
-                <img src="images/CasaPerro.jpeg" alt="Pet Image" class="pet-image">
-              </div>
-              <h6 class="pet-name">${petData.nombre}</h6>
-              <div class="pet-actions">
-                <button class="btn-icon edit-pet" data-pet-id="${doc.id}"><i class="fas fa-edit"></i></button>
-                <button class="btn-icon delete-pet" data-pet-id="${doc.id}"><i class="fas fa-trash"></i></button>
-              </div>
+
+        // Crear la estructura de la tarjeta
+        const petCard = document.createElement("div");
+        petCard.classList.add("pet-card");
+
+        petCard.innerHTML = `
+          <div class="pet-card-header">
+            <div class="pet-image-container">
+              <img src="images/DogProfile.jpeg" alt="Pet Image" class="pet-image">
             </div>
-            <div class="pet-card-details">
-              <p><strong>Raza:</strong> <span>${petData.raza}</span></p>
-              <p><strong>Edad:</strong> <span>${petData.edad} años</span></p>
-              <p><strong>Comportamiento:</strong> <span>${petData.descripcion}</span></p>
+            <h6 class="pet-name">${petData.nombre}</h6>
+            <div class="pet-actions">
+              <button class="btn-icon edit-pet" data-pet-id="${doc.id}"><i class="fas fa-edit"></i></button>
+              <button class="btn-icon delete-pet" data-pet-id="${doc.id}"><i class="fas fa-trash"></i></button>
             </div>
           </div>
+          <div class="pet-card-details">
+            <p><strong>Raza:</strong> <span>${petData.raza}</span></p>
+            <p><strong>Edad:</strong> <span>${petData.edad} años</span></p>
+            <p><strong>Comportamiento:</strong> <span>${petData.descripcion}</span></p>
+          </div>
         `;
-        petsGrid.insertAdjacentHTML("beforeend", petCard);
+
+        // Agregar evento para expandir/cerrar detalles
+        petCard.addEventListener("click", function () {
+          const details = this.querySelector(".pet-card-details");
+          details.style.display = details.style.display === "block" ? "none" : "block";
+        });
+
+        // Agregar la tarjeta al contenedor
+        petsGrid.appendChild(petCard);
       });
 
       // Agregar el botón "Agregar Mascota" al final
-      petsGrid.insertAdjacentHTML("beforeend", `
-        <div class="add-pet">
-          <button class="btn btn-primary" id="add-pet"><i class="fas fa-plus"></i> Agregar Mascota</button>
-        </div>
-      `);
+      const addPetContainer = document.createElement("div");
+      addPetContainer.classList.add("add-pet");
+      addPetContainer.innerHTML = `
+        <button class="btn btn-primary" id="add-pet"><i class="fas fa-plus"></i> Agregar Mascota</button>
+      `;
+      petsGrid.appendChild(addPetContainer);
     }
   } catch (error) {
     console.error("Error al cargar las mascotas:", error);
     alert("Hubo un problema al cargar las mascotas. Inténtalo de nuevo.");
   }
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
   onAuthStateChanged(auth, (user) => {
