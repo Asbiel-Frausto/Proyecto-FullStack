@@ -301,42 +301,19 @@
                 </div>
                 <div class="profile-info">
                   <h5 id="user-name">Nombre del Usuario</h5>
-                  <p id="user-email">correo@example.com</p>
+                  <p id="user-email"></p>
                   <button class="btn btn-primary" id="edit-profile">Editar Perfil</button>
                   <button class="btn btn-danger" id="logout-button">Cerrar Sesión</button>
                 </div>
               </div>
             </div>
-
-            <!-- Pets Section -->
-            <div class="grid-item">
-              <h4>Mis Mascotas</h4><br>
-              <div class="pets-grid">
-                <!-- Pet Card -->
-                <div class="pet-card">
-                  <div class="pet-card-header">
-                    <div class="pet-image-container">
-                      <img src="images/CasaPerro.jpeg" alt="Pet Image" class="pet-image">
-                    </div>
-                    <h6 class="pet-name">Max</h6>
-                    <div class="pet-actions">
-                      <button class="btn-icon edit-pet"><i class="fas fa-edit"></i></button>
-                      <button class="btn-icon delete-pet"><i class="fas fa-trash"></i></button>
-                    </div>
-                  </div>
-                  <div class="pet-card-details">
-                    <p><strong>Raza:</strong> <span>Golden Retriever</span></p>
-                    <p><strong>Edad:</strong> <span>3 años</span></p>
-                    <p><strong>Comportamiento:</strong> <span>Juguetón y amigable</span></p>
-                    <p><strong>Comentarios:</strong> <span>Le encanta correr en el parque.</span></p>
-                  </div>
-                </div>
-                <!-- Add Pet Button -->
-                <div class="add-pet">
-                  <button class="btn btn-primary" id="add-pet"><i class="fas fa-plus"></i> Agregar Mascota</button>
-                </div>
-              </div>
-            </div>
+    <!-- Pets Section -->
+    <div class="grid-item">
+        <h4>Mis Mascotas</h4><br>
+        <div class="pets-grid">
+            <!-- Las tarjetas de mascotas se generarán dinámicamente aquí -->
+        </div>
+    </div>
 
             <!-- Reservations Section -->
             <div class="grid-item">
@@ -473,6 +450,7 @@
       });
     });
   </script>
-  <script type="module" src="js/login.js"></script>
+  <script type="module" src="js/login.js" ></script>
+  <script type="module" src="js/addpet.js"></script>
 </body>
 </html>

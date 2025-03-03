@@ -8,57 +8,148 @@ const firebaseConfig = {
   appId: "1:868647766575:web:3d7bcd02545bf9621814da",
 };
 
-// Inicializar Firebase
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
+import { auth, db } from "./firebaseConfig.js";
+import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"; // 👈 Importa onAuthStateChanged correctamente
+
+
+// Obtener el formulario
+const petForm = document.getElementById("petForm");
+
+// Escuchar el evento de envío del formulario
+petForm?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  // Obtener los valores del formulario
+  const petName = document.getElementById("petName").value;
+  const petAge = document.getElementById("petAge").value;
+  const petBreed = document.getElementById("petBreed").value;
+  const petDescription = document.getElementById("petDescription").value;
+
+  // Obtener el usuario autenticado
+  const user = auth.currentUser;
+
+  if (!user) {
+    alert("Debes iniciar sesión para agregar una mascota.");
+    window.location.href = "login.html"; // Redirigir al usuario a la página de inicio de sesión
+    return;
+  }
+
+  try {
+    // Crear un nuevo documento en la colección "pets"
+    const petId = `${user.uid}_${Date.now()}`; // Generar un ID único para la mascota
+    const petRef = doc(db, "pets", petId); // Referencia al documento con el ID generado
+
+    // Guardar los datos de la mascota en Firestore
+    await setDoc(petRef, {
+      IDpet: petId, // ID único de la mascota
+      nombre: petName, // Nombre de la mascota
+      edad: petAge, // Edad de la mascota
+      raza: petBreed, // Raza de la mascota
+      descripcion: petDescription, // Descripción de la mascota
+      ownerUID: user.uid, // UID del dueño de la mascota
+    });
+
+    console.log(`Mascota ${petName} agregada correctamente con ID: ${petId}`);
+    alert("Mascota agregada correctamente.");
+    
+    petForm.reset(); // Limpiar el formulario
+
+    // Redirigir al usuario a su perfil
+    window.location.href = "profile.html";
+  } catch (error) {
+    console.error("Error al agregar la mascota:", error);
+    alert("Hubo un problema al agregar la mascota. Inténtalo de nuevo.");
+  }
+});
+
+import { collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+// Obtener el contenedor de las mascotas
+const petsGrid = document.querySelector(".pets-grid");
+
+// Función para cargar las mascotas del usuario
+async function loadPets() {
+  const user = auth.currentUser;
+
+  if (!user) {
+    alert("Debes iniciar sesión para ver tus mascotas.");
+    window.location.href = "login.html"; // Redirigir al usuario a la página de inicio de sesión
+    return;
+  }
+
+  try {
+    // Consultar las mascotas del usuario actual
+    const petsRef = collection(db, "pets");
+    const q = query(petsRef, where("ownerUID", "==", user.uid));
+    const querySnapshot = await getDocs(q);
+
+    // Limpiar el contenedor de mascotas
+    petsGrid.innerHTML = "";
+
+    // Verificar si hay mascotas
+    if (querySnapshot.empty) {
+      // Mostrar solo el botón "Agregar Mascota" si no hay mascotas
+      petsGrid.innerHTML = `
+        <div class="add-pet">
+          <button class="btn btn-primary" id="add-pet"><i class="fas fa-plus"></i> Agregar Mascota</button>
+        </div>
+      `;
+    } else {
+      // Generar tarjetas para cada mascota
+      querySnapshot.forEach((doc) => {
+        const petData = doc.data();
+        const petCard = `
+          <div class="pet-card">
+            <div class="pet-card-header">
+              <div class="pet-image-container">
+                <img src="images/CasaPerro.jpeg" alt="Pet Image" class="pet-image">
+              </div>
+              <h6 class="pet-name">${petData.nombre}</h6>
+              <div class="pet-actions">
+                <button class="btn-icon edit-pet" data-pet-id="${doc.id}"><i class="fas fa-edit"></i></button>
+                <button class="btn-icon delete-pet" data-pet-id="${doc.id}"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+            <div class="pet-card-details">
+              <p><strong>Raza:</strong> <span>${petData.raza}</span></p>
+              <p><strong>Edad:</strong> <span>${petData.edad} años</span></p>
+              <p><strong>Comportamiento:</strong> <span>${petData.descripcion}</span></p>
+            </div>
+          </div>
+        `;
+        petsGrid.insertAdjacentHTML("beforeend", petCard);
+      });
+
+      // Agregar el botón "Agregar Mascota" al final
+      petsGrid.insertAdjacentHTML("beforeend", `
+        <div class="add-pet">
+          <button class="btn btn-primary" id="add-pet"><i class="fas fa-plus"></i> Agregar Mascota</button>
+        </div>
+      `);
+    }
+  } catch (error) {
+    console.error("Error al cargar las mascotas:", error);
+    alert("Hubo un problema al cargar las mascotas. Inténtalo de nuevo.");
+  }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
-  const petForm = document.getElementById("petForm");
-
-  auth.onAuthStateChanged(async (user) => {
-    if (!user) {
-      alert("Debes iniciar sesión.");
-      window.location.href = "index.html"; // Redirigir a la página principal
-      return;
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // Solo cargar mascotas si estamos en profile.html
+      if (window.location.pathname.includes("profile.html")) {
+        loadPets();
+      }
+    } else {
+      window.location.href = "login.html"; // Redirigir al usuario a la página de inicio de sesión
     }
+  });
 
-    petForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      // Obtener valores del formulario
-      const petName = document.getElementById("petName").value.trim();
-      const petAge = document.getElementById("petAge").value.trim();
-      const petBreed = document.getElementById("petBreed").value.trim();
-      const petDescription = document.getElementById("petDescription").value.trim();
-
-      // Validar que todos los campos obligatorios estén llenos
-      if (!petName || !petAge || !petBreed || !petDescription) {
-        alert("Todos los campos son obligatorios.");
-        return;
-      }
-
-      try {
-        // Generar un ID único para la mascota
-        const petID = crypto.randomUUID();
-
-        // Guardar datos de la mascota en la subcolección 'pets' dentro del usuario
-        await db.collection("users").doc(user.uid).collection("pets").doc(petID).set({
-          IDpet: petID,
-          descripcion: petDescription,
-          edad: petAge,
-          nombre: petName,
-          raza: petBreed,
-          ownerUID: user.uid, // ID del dueño de la mascota
-        });
-
-        alert("Mascota registrada con éxito.");
-        petForm.reset(); // Limpiar el formulario
-        window.location.href = "profile.html"; // Redirigir a la página de perfil
-      } catch (error) {
-        console.error("Error al registrar la mascota:", error);
-        alert("Hubo un error al registrar la mascota.");
-      }
-    });
+  // Delegación de eventos para el botón "Agregar Mascota"
+  document.addEventListener("click", (event) => {
+    if (event.target && event.target.id === "add-pet") {
+      window.location.href = "addpet.html"; // Redirigir a la página de agregar mascota
+    }
   });
 });

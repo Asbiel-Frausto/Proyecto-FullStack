@@ -6,7 +6,7 @@ import {
   onAuthStateChanged,
   signOut,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 // Obtener referencias a los enlaces y secciones
 const showRegisterLink = document.getElementById('show-register');
@@ -52,6 +52,12 @@ document.addEventListener("DOMContentLoaded", () => {
       await sendEmailVerification(user);
       alert("Usuario creado. Se ha enviado un correo de verificación");
 
+      // Limpiar los campos del formulario
+      document.getElementById("nombreReg").value = '';
+      document.getElementById("emailReg").value = '';
+      document.getElementById("passwordReg").value = '';
+      document.getElementById("verPasswordReg").value = '';
+
       // Guardar el uid en Firestore
       await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
@@ -60,15 +66,19 @@ document.addEventListener("DOMContentLoaded", () => {
         fotoPerfilUsuario: ""
       });
 
+      console.log("Usuario guardado en Firestore correctamente.");
+
       // Redirigir al usuario a la página de inicio de sesión después del registro
       loginSection.style.display = 'block';
       registerSection.style.display = 'none';
     } catch (error) {
-      const errorCode = error.code;
-      if (errorCode === "auth/email-already-in-use") alert("El correo ya está en uso");
-      else if (errorCode === "auth/invalid-email") alert("El correo no es válido");
-      else if (errorCode === "auth/weak-password") alert("La contraseña debe tener al menos 6 caracteres");
-      else console.error("Error desconocido:", error);
+      console.error("Error al registrar el usuario:", error);
+
+      // Manejo de errores específicos
+      if (error.code === "auth/email-already-in-use") alert("El correo ya está en uso");
+      else if (error.code === "auth/invalid-email") alert("El correo no es válido");
+      else if (error.code === "auth/weak-password") alert("La contraseña debe tener al menos 6 caracteres");
+      else alert("Ocurrió un error inesperado. Inténtalo de nuevo.");
     }
   });
 
@@ -95,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!user.emailVerified) {
         alert("Por favor, verifica tu correo antes de acceder.");
         await signOut(auth); // Cerrar sesión si el correo no está verificado
-        window.location.href = "verify-email.html"; // Redirigir a una página de verificación
+        window.location.href = "index.html"; // Redirigir a una página de verificación
         return;
       }
 
@@ -125,26 +135,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Mostrar el correo del usuario en la página
       mostrarDatosPerfil(user.email);
+
+      // Cargar el nombre del usuario desde Firestore
+      loadUserName(user);
     } else {
       // Verifica si el usuario está en la página de inicio de sesión
       if (!window.location.pathname.includes("login.html")) {
         console.log("No hay usuario autenticado, redirigiendo a LogIn.html");
       }
     }
-  });
-});
-
-// Manejo de cierre de sesión
-document.addEventListener("DOMContentLoaded", () => {
-  const CerrarSesion = document.getElementById("logout-button");
-  CerrarSesion?.addEventListener("click", () => {
-    signOut(auth).then(() => {
-      alert("Sesión cerrada correctamente.");
-      window.location.href = "index.html";
-    }).catch((error) => {
-      console.error("Error al cerrar sesión:", error);
-      alert("Hubo un problema al cerrar sesión. Inténtalo de nuevo.");
-    });
   });
 });
 
@@ -155,3 +154,43 @@ function mostrarDatosPerfil(email) {
     EmailElement.textContent = `${email}`;
   }
 }
+
+// Función para obtener el nombre del usuario desde Firestore
+async function loadUserName(user) {
+  if (!user) return; // Si no hay usuario autenticado, salir
+
+  try {
+    const userRef = doc(db, "users", user.uid); // Referencia al documento del usuario
+    const userSnap = await getDoc(userRef);
+
+    if (userSnap.exists()) {
+      const userName = userSnap.data().nombre; // Obtener el nombre del usuario
+      const nameElement = document.getElementById("user-name");
+
+      if (nameElement) {
+        nameElement.textContent = userName; // Actualizar el HTML
+      } else {
+        console.warn("Elemento con id 'user-name' no encontrado en el DOM.");
+      }
+    } else {
+      console.log("No se encontró información del usuario en Firestore.");
+    }
+  } catch (error) {
+    console.error("Error al obtener el nombre del usuario:", error);
+  }
+}
+
+// Manejo de cierre de sesión
+document.addEventListener("DOMContentLoaded", () => {
+  const CerrarSesion = document.getElementById("logout-button");
+  CerrarSesion?.addEventListener("click", async () => {
+    try {
+      await signOut(auth);
+      alert("Sesión cerrada correctamente.");
+      window.location.href = "index.html";
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+      alert("Hubo un problema al cerrar sesión. Inténtalo de nuevo.");
+    }
+  });
+});
