@@ -4,35 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Mascota</title>
-    <!-- Cargar Firebase v8 desde el CDN -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <!-- Cargar tu archivo JavaScript -->
-    <script src="js/addpet.js"></script>
-    <style>
-        /* Tus estilos CSS aquí */
-    </style>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7COpen+Sans:300,300italic,400,600,700,900">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="addPet.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Agregar Mascota</h1>
-        <form id="petForm">
-            <label for="petName">Nombre:</label>
-            <input type="text" id="petName" name="petName" required>
-
-            <label for="petAge">Edad:</label>
-            <input type="number" id="petAge" name="petAge" required>
-
-            <label for="petBreed">Raza:</label>
-            <input type="text" id="petBreed" name="petBreed" required>
-
-            <label for="petDescription">Descripción:</label>
-            <textarea id="petDescription" name="petDescription" required></textarea>
-
-            <button type="submit">Agregar Mascota</button>
-        </form>
-        <button onclick="window.location.href='index.html'">Volver</button>
+    <div class="page text-center">
+        <!-- Header -->
+        <header class="page-head">
+            <div class="rd-navbar-wrap">
+                <nav class="rd-navbar" data-layout="rd-navbar-fixed">
+                    <div class="rd-navbar-inner">
+                        <div class="rd-navbar-panel">
+                            <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                            <div class="rd-navbar-brand">
+                                <a class="brand-name" href="index.html"><img src="images/logo.png" width="250" height="100" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="rd-navbar-nav-wrap">
+                            <ul class="rd-navbar-nav">
+                                <li><a href="./">Inicio</a></li>
+                                <li><a href="gallery.html">Galería</a></li>
+                                <li><a href="about.html">Sobre nosotros</a></li>
+                                <li><a href="services.html">Servicios</a></li>
+                                <li><a href="login.html">Iniciar sesión</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- Main Content -->
+        <main class="page-content">
+            <section class="section-bottom-80 section-title section-title-left-3">
+                <div class="shell shell-wide">
+                    <h4 class="offset-top-54">Agregar Mascota</h4>
+                    <div class="range range-xs-center offset-top-26">
+                        <div class="cell-md-8 text-md-left">
+                            <div class="form-container">
+                                <form id="petForm">
+                                    <label for="petName">Nombre:</label>
+                                    <input type="text" id="petName" name="petName" class="form-control" required>
+                                    
+                                    <label for="petAge">Edad:</label>
+                                    <input type="number" id="petAge" name="petAge" class="form-control" required>
+                                    
+                                    <label for="petBreed">Raza:</label>
+                                    <input type="text" id="petBreed" name="petBreed" class="form-control" required>
+                                    
+                                    <label for="petDescription">Descripción:</label>
+                                    <textarea id="petDescription" name="petDescription" class="form-control" required></textarea>
+                                    
+                                    <label for="petImage">Foto:</label>
+                                    <input type="file" id="petImage" name="petImage" accept="image/*" class="form-control">
+                                    
+                                    <button type="submit" class="btn btn-primary">Agregar Mascota</button>
+                                </form>
+                                <button class="btn btn-secondary" onclick="window.location.href='index.html'">Volver</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer -->
+        <footer class="page-footer">
+            <div class="container">
+                <span>&#169;</span> <span id="copyright-year"></span>
+                <hr class="divider divider-default divider-vertical">
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+        </footer>
     </div>
     <script src="js/core.min.js"></script>
     <script src="js/script.js"></script>
