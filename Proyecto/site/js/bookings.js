@@ -1,64 +1,120 @@
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, collection, doc, getDoc, addDoc, serverTimestamp } from "firebase/firestore";
-import { app } from "./firebase.js"; // Importa la configuración de Firebase
+// Importa los módulos de Firebase y la configuración desde firebaseConfig.js
+import { auth, db } from "./firebaseConfig.js";  // Asegúrate de que la ruta sea correcta
+import { collection, query, where, getDocs, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"; 
 
-const auth = getAuth(app);
-const db = getFirestore(app);
+// Obtener el contenedor de las reservaciones
+const reservationsGrid = document.querySelector(".reservations-grid");
 
-document.addEventListener("DOMContentLoaded", () => {
-  const bookingForm = document.getElementById("bookingForm");
+// Función para cargar las reservaciones del usuario
+async function loadReservations() {
+  const user = auth.currentUser;
 
-  onAuthStateChanged(auth, async (user) => {
-    if (!user) {
-      alert("Debes iniciar sesión.");
-      window.location.href = "index.html"; // Redirigir si el usuario no está autenticado
-      return;
-    }
+  if (!user) {
+    alert("Debes iniciar sesión para ver tus reservaciones.");
+    window.location.href = "login.html"; // Redirigir al usuario a la página de inicio de sesión
+    return;
+  }
 
-    console.log("✅ Usuario autenticado:", user.uid);
+  try {
+    // Consultar las reservaciones del usuario actual
+    const reservationsRef = collection(db, "reservations");
+    const q = query(reservationsRef, where("ownerUID", "==", user.uid));
+    const querySnapshot = await getDocs(q);
 
-    bookingForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
+    // Limpiar el contenedor de reservaciones
+    reservationsGrid.innerHTML = "";
 
-      const petID = document.getElementById("petID")?.value.trim();
-      const serviceType = document.getElementById("serviceType")?.value.trim();
+    // Verificar si hay reservaciones
+    if (querySnapshot.empty) {
+      // Mostrar solo el botón "Agregar Reservación" si no hay reservaciones
+      reservationsGrid.innerHTML = `
+        <div class="add-reservation">
+          <button class="btn btn-primary" id="add-reservation"><i class="fas fa-plus"></i> Agregar Reservación</button>
+        </div>
+      `;
+    } else {
+      // Generar tarjetas para cada reservación
+      querySnapshot.forEach((doc) => {
+        const reservationData = doc.data();
 
-      console.log("📤 Datos capturados:");
-      console.log("petID:", petID);
-      console.log("Servicio:", serviceType);
+        // Crear la estructura de la tarjeta
+        const reservationCard = document.createElement("div");
+        reservationCard.classList.add("reservation-card");
 
-      if (!petID || !serviceType) {
-        alert("❌ Debes seleccionar una mascota y un servicio.");
-        return;
-      }
+        reservationCard.innerHTML = `
+          <div class="reservation-card-header">
+            <h6 class="reservation-name">Reservación para: ${reservationData.petName}</h6>
+            <div class="reservation-actions">
+              <!-- Solo mostrar el botón de eliminar -->
+              <button class="btn-icon delete-reservation" data-reservation-id="${doc.id}"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>
+          <div class="reservation-card-details">
+            <p><strong>Fecha de inicio:</strong> <span>${reservationData.startDate}</span></p>
+            <p><strong>Fecha de fin:</strong> <span>${reservationData.endDate}</span></p>
+            <p><strong>Notas:</strong> <span>${reservationData.notes}</span></p>
+          </div>
+        `;
 
-      // Verificar si la mascota realmente existe
-      const petRef = doc(db, "users", user.uid, "pets", petID);
-      const petSnap = await getDoc(petRef);
-
-      if (!petSnap.exists()) {
-        alert("❌ La mascota seleccionada no existe.");
-        return;
-      }
-
-      console.log("✅ Mascota encontrada en la base de datos:", petSnap.data());
-
-      try {
-        const bookingRef = collection(db, "users", user.uid, "bookings");
-        await addDoc(bookingRef, {
-          petID, // Asegurar que petID se guarde correctamente
-          servicio: serviceType, // Guardar tipo de servicio
-          estado: "pendiente", // Estado inicial
-          fecha: serverTimestamp(), // Fecha actual
+        // Agregar evento para expandir/cerrar detalles
+        reservationCard.addEventListener("click", function () {
+          const details = this.querySelector(".reservation-card-details");
+          details.style.display = details.style.display === "block" ? "none" : "block";
         });
 
-        alert("✅ Reservación creada con éxito.");
-        bookingForm.reset();
-        window.location.href = "dashboard.html";
-      } catch (error) {
-        console.error("❌ Error al guardar la reservación:", error);
-        alert("Hubo un error al guardar la reservación.");
+        // Agregar la tarjeta al contenedor
+        reservationsGrid.appendChild(reservationCard);
+      });
+
+      // Agregar el botón "Agregar Reservación" al final
+      const addReservationContainer = document.createElement("div");
+      addReservationContainer.classList.add("add-reservation");
+      addReservationContainer.innerHTML = `
+        <button class="btn btn-primary" id="add-reservation"><i class="fas fa-plus"></i> Agregar Reservación</button>
+      `;
+      reservationsGrid.appendChild(addReservationContainer);
+    }
+  } catch (error) {
+    console.error("Error al cargar las reservaciones:", error);
+    alert("Hubo un problema al cargar las reservaciones. Inténtalo de nuevo.");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // Solo cargar reservaciones si estamos en reservations.html
+      if (window.location.pathname.includes("reservations.html")) {
+        loadReservations();
       }
-    });
+    } else {
+      window.location.href = "login.html"; // Redirigir al usuario a la página de inicio de sesión
+    }
+  });
+
+  // Delegación de eventos para el botón "Agregar Reservación"
+  document.addEventListener("click", (event) => {
+    if (event.target && event.target.id === "add-reservation") {
+      window.location.href = "addreservation.html"; // Redirigir a la página de agregar reservación
+    }
+  });
+
+  // Delegación de eventos para borrar reservaciones
+  reservationsGrid.addEventListener("click", async (event) => {
+    if (event.target && event.target.classList.contains("delete-reservation")) {
+      event.stopPropagation();  // Evita que el clic en el botón de borrar dispare el evento de expansión de detalles
+      const reservationId = event.target.getAttribute("data-reservation-id");
+      try {
+        // Eliminar la reservación de Firestore usando el ID
+        const reservationRef = doc(db, "reservations", reservationId); // Referencia al documento de la reservación
+        await deleteDoc(reservationRef);  // Eliminar el documento
+        alert('Reservación eliminada correctamente.');
+        loadReservations(); // Recargar las reservaciones después de eliminar
+      } catch (error) {
+        console.error("Error al eliminar la reservación:", error);
+        alert("Hubo un problema al eliminar la reservación.");
+      }
+    }
   });
 });
